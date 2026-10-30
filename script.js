@@ -56,7 +56,7 @@ const translations = {
         settings: "Settings",
         quote: "Small steps every day lead to big results.",
         student: "Student",
-        welcome: "Welcome back, Salwa!",
+        welcome: "Welcome to Study with Salwa!",
         newTask: "New Task",
         dailyMotivation: "YOUR DAILY MOTIVATION",
         heroTitle: "Make today count.",
