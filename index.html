@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study with Salwa</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">S</div>
+
+            <div>
+                <h2>Study with Salwa</h2>
+                <span data-i18n="workspace">My workspace</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <p class="nav-label" data-i18n="menu">MENU</p>
+
+            <button type="button" class="nav-item active" data-page="dashboard">
+                <span>⌂</span>
+                <span data-i18n="dashboard">Dashboard</span>
+            </button>
+
+            <button type="button" class="nav-item" data-page="tasks">
+                <span>▤</span>
+                <span data-i18n="myTasks">My Tasks</span>
+            </button>
+
+            <button type="button" class="nav-item" data-page="focus">
+                <span>◷</span>
+                <span data-i18n="focus">Focus Timer</span>
+            </button>
+
+            <p class="nav-label settings-label" data-i18n="preferences">
+                PREFERENCES
+            </p>
+
+            <button type="button" class="nav-item" id="settingsButton">
+                <span>⚙</span>
+                <span data-i18n="settings">Settings</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="quote-box">
+                <span>✦</span>
+                <p data-i18n="quote">
+                    Small steps every day lead to big results.
+                </p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">S</div>
+
+                <div>
+                    <strong>Salwa</strong>
+                    <small data-i18n="student">Student</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="welcome" data-i18n="welcome">
+                    Welcome back, Salwa!
+                </p>
+
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="date-clock">
+                    <span id="currentDate"></span>
+                    <strong id="liveClock">00:00:00</strong>
+                </div>
+
+                <button type="button" class="icon-button" id="themeButton">
+                    ☾
+                </button>
+
+                <button type="button" class="primary-button" id="addTaskTop">
+                    ＋ <span data-i18n="newTask">New Task</span>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section class="page active" id="dashboardPage">
+
+            <div class="hero">
+
+                <div>
+                    <span class="hero-tag" data-i18n="dailyMotivation">
+                        YOUR DAILY MOTIVATION
+                    </span>
+
+                    <h2 data-i18n="heroTitle">
+                        Make today count.
+                    </h2>
+
+                    <p data-i18n="heroText">
+                        Organize your tasks, stay focused and achieve your goals.
+                    </p>
+                </div>
+
+                <div class="hero-decoration">✦</div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">▤</div>
+                    <p data-i18n="totalTasks">Total Tasks</p>
+                    <h2 id="totalTasks">0</h2>
+                    <small data-i18n="allTasks">All your tasks</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p data-i18n="completed">Completed</p>
+                    <h2 id="completedTasks">0</h2>
+                    <small data-i18n="wellDone">Well done!</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">◷</div>
+                    <p data-i18n="pending">Pending</p>
+                    <h2 id="pendingTasks">0</h2>
+                    <small data-i18n="keepGoing">Keep going!</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">⏱</div>
+                    <p data-i18n="focusSessions">Focus Sessions</p>
+                    <h2 id="focusSessions">0</h2>
+                    <small data-i18n="pomodoroSessions">Pomodoro sessions</small>
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD PANELS -->
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3 data-i18n="tasksOverview">Tasks Overview</h3>
+                            <p data-i18n="progressSubtitle">
+                                Your productivity progress
+                            </p>
+                        </div>
+
+                        <span class="progress-percent" id="progressPercent">
+                            0%
+                        </span>
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <div class="progress-details">
+                        <span id="progressCompleted">0 completed</span>
+                        <span id="progressRemaining">0 remaining</span>
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3 data-i18n="quickFocus">Quick Focus</h3>
+                            <p data-i18n="focusSubtitle">
+                                Time to concentrate
+                            </p>
+                        </div>
+
+                        <span class="focus-symbol">◷</span>
+                    </div>
+
+                    <div class="quick-timer">
+                        <strong id="quickTimer">25:00</strong>
+
+                        <button type="button" class="primary-button"
+                            id="quickFocusButton" data-i18n="startFocus">
+                            Start focus
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT TASKS -->
+            <div class="panel task-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h3 data-i18n="recentTasks">Recent Tasks</h3>
+                        <p data-i18n="recentSubtitle">
+                            A look at what you need to do
+                        </p>
+                    </div>
+
+                    <button type="button" class="text-button"
+                        id="viewAllTasks" data-i18n="viewAll">
+                        View all →
+                    </button>
+                </div>
+
+                <div id="recentTasksList" class="task-list"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MY TASKS -->
+        <section class="page" id="tasksPage">
+
+            <div class="panel">
+
+                <div class="task-toolbar">
+
+                    <div class="search-box">
+                        <span>⌕</span>
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Search tasks..."
+                            data-i18n-placeholder="searchPlaceholder">
+                    </div>
+
+                    <select id="filterSelect">
+                        <option value="all" data-i18n="allTasksFilter">
+                            All tasks
+                        </option>
+
+                        <option value="pending" data-i18n="pendingFilter">
+                            Pending
+                        </option>
+
+                        <option value="completed" data-i18n="completedFilter">
+                            Completed
+                        </option>
+                    </select>
+
+                    <button type="button" class="primary-button" id="addTaskButton">
+                        ＋ <span data-i18n="addTask">Add Task</span>
+                    </button>
+
+                </div>
+
+                <div id="allTasksList" class="task-list"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOCUS TIMER -->
+        <section class="page" id="focusPage">
+
+            <div class="focus-page-content">
+
+                <div class="focus-intro">
+
+                    <span class="hero-tag" data-i18n="focusMode">
+                        FOCUS MODE
+                    </span>
+
+                    <h2 data-i18n="focusBigTitle">
+                        It's time to focus.
+                    </h2>
+
+                    <p data-i18n="focusBigText">
+                        One task at a time. You've got this!
+                    </p>
+
+                </div>
+
+
+                <div class="timer-card">
+
+                    <div class="timer-tabs">
+
+                        <button type="button" class="timer-tab active"
+                            data-minutes="25" data-mode="focus"
+                            data-i18n="focus">
+                            Focus
+                        </button>
+
+                        <button type="button" class="timer-tab"
+                            data-minutes="5" data-mode="short"
+                            data-i18n="shortBreak">
+                            Short Break
+                        </button>
+
+                        <button type="button" class="timer-tab"
+                            data-minutes="15" data-mode="long"
+                            data-i18n="longBreak">
+                            Long Break
+                        </button>
+
+                    </div>
+
+
+                    <div class="timer-circle">
+
+                        <svg viewBox="0 0 220 220">
+
+                            <circle class="timer-bg"
+                                cx="110" cy="110" r="98">
+                            </circle>
+
+                            <circle class="timer-progress"
+                                id="timerProgress"
+                                cx="110" cy="110" r="98">
+                            </circle>
+
+                        </svg>
+
+                        <div class="timer-time">
+                            <strong id="mainTimer">25:00</strong>
+
+                            <span id="timerStatus" data-i18n="readyToFocus">
+                                Ready to focus
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="timer-controls">
+
+                        <button type="button" class="primary-button timer-start"
+                            id="timerStart" data-i18n="start">
+                            Start
+                        </button>
+
+                        <button type="button" class="secondary-button"
+                            id="timerReset" data-i18n="reset">
+                            Reset
+                        </button>
+
+                    </div>
+
+
+                    <div class="session-info">
+                        <span data-i18n="completedSessions">
+                            Completed sessions:
+                        </span>
+
+                        <strong id="sessionCount">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="panel focus-task-panel">
+
+                    <h3 data-i18n="linkTask">
+                        What are you working on?
+                    </h3>
+
+                    <select id="focusTaskSelect">
+                        <option value="" data-i18n="noTaskSelected">
+                            No task selected
+                        </option>
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+        <section class="page" id="settingsPage">
+
+            <div class="panel settings-panel">
+
+                <h3 data-i18n="generalSettings">
+                    General Settings
+                </h3>
+
+                <p data-i18n="settingsDescription">
+                    Customize your study space.
+                </p>
+
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong data-i18n="language">Language</strong>
+
+                        <p data-i18n="languageDescription">
+                            Choose your preferred language.
+                        </p>
+                    </div>
+
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
+                    </select>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong data-i18n="appearance">Appearance</strong>
+
+                        <p data-i18n="appearanceDescription">
+                            Switch between light and dark mode.
+                        </p>
+                    </div>
+
+                    <button type="button" class="secondary-button"
+                        id="settingsThemeButton" data-i18n="toggleTheme">
+                        Toggle theme
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div>
+                        <strong data-i18n="dataManagement">
+                            Data Management
+                        </strong>
+
+                        <p data-i18n="dataDescription">
+                            Your tasks are saved in this browser.
+                        </p>
+                    </div>
+
+                    <button type="button" class="danger-button"
+                        id="clearTasksButton" data-i18n="clearTasks">
+                        Clear all tasks
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel about-panel">
+
+                <div class="brand-icon">S</div>
+
+                <h3>Study with Salwa</h3>
+
+                <p data-i18n="aboutText">
+                    A personal space to organize your studies,
+                    build good habits and stay productive.
+                </p>
+
+                <small>Made with ♥ by Salwa</small>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            <p>
+                © 2026 Study with Salwa ·
+                <span data-i18n="footerText">
+                    Your journey, your progress.
+                </span>
+            </p>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- ADD / EDIT TASK MODAL -->
+<div class="modal-overlay" id="taskModal">
+
+    <div class="modal">
+
+        <div class="modal-heading">
+
+            <div>
+                <h2 id="modalTitle" data-i18n="createTask">
+                    Create a task
+                </h2>
+
+                <p data-i18n="modalSubtitle">
+                    Add something you want to accomplish.
+                </p>
+            </div>
+
+            <button type="button" class="close-button" id="closeModal">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="taskForm">
+
+            <input type="hidden" id="taskId">
+
+
+            <label for="taskTitle" data-i18n="taskTitle">
+                Task title
+            </label>
+
+            <input
+                type="text"
+                id="taskTitle"
+                required
+                maxlength="100"
+                placeholder="e.g. Study Java"
+                data-i18n-placeholder="taskPlaceholder">
+
+
+            <label for="taskDescription" data-i18n="description">
+                Description
+            </label>
+
+            <textarea
+                id="taskDescription"
+                rows="3"
+                placeholder="Add some details..."
+                data-i18n-placeholder="descriptionPlaceholder">
+            </textarea>
+
+
+            <!-- STUDY DATE AND START TIME -->
+            <div class="form-row">
+
+                <div>
+                    <label for="taskDate" data-i18n="dueDate">
+                        Study date
+                    </label>
+
+                    <input type="date" id="taskDate">
+                </div>
+
+                <div>
+                    <label for="taskTime" data-i18n="dueTime">
+                        Start time
+                    </label>
+
+                    <input type="time" id="taskTime">
+                </div>
+
+            </div>
+
+
+            <!-- STUDY DURATION -->
+            <div class="form-row duration-row">
+
+                <div>
+                    <label for="taskDurationHours">
+                        Study duration (hours)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="taskDurationHours"
+                        min="0"
+                        max="24"
+                        value="1">
+                </div>
+
+                <div>
+                    <label for="taskDurationMinutes">
+                        Extra minutes
+                    </label>
+
+                    <select id="taskDurationMinutes">
+                        <option value="0">0 min</option>
+                        <option value="15">15 min</option>
+                        <option value="30" selected>30 min</option>
+                        <option value="45">45 min</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <p id="studyDayPreview" class="study-day-preview">
+                Choose a date to see the study day.
+            </p>
+
+
+            <!-- PRIORITY AND CATEGORY -->
+            <div class="form-row">
+
+                <div>
+                    <label for="taskPriority" data-i18n="priority">
+                        Priority
+                    </label>
+
+                    <select id="taskPriority">
+
+                        <option value="low" data-i18n="low">
+                            Low
+                        </option>
+
+                        <option value="medium" selected data-i18n="medium">
+                            Medium
+                        </option>
+
+                        <option value="high" data-i18n="high">
+                            High
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div>
+                    <label for="taskCategory" data-i18n="category">
+                        Category
+                    </label>
+
+                    <select id="taskCategory">
+
+                        <option value="Study" data-i18n="study">
+                            Study
+                        </option>
+
+                        <option value="Personal" data-i18n="personal">
+                            Personal
+                        </option>
+
+                        <option value="Work" data-i18n="work">
+                            Work
+                        </option>
+
+                        <option value="Other" data-i18n="other">
+                            Other
+                        </option>
+
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button" class="secondary-button"
+                    id="cancelModal" data-i18n="cancel">
+                    Cancel
+                </button>
+
+                <button type="submit" class="primary-button"
+                    id="saveTaskButton" data-i18n="saveTask">
+                    Save Task
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST MESSAGE -->
+<div class="toast" id="toast"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
