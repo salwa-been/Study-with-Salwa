@@ -160,7 +160,7 @@ const translations = {
         settings: "Paramètres",
         quote: "Chaque petit pas mène à de grands résultats.",
         student: "Étudiante",
-        welcome: "Bon retour, Salwa !",
+        welcome: "Bienvenue sur Study with Salwa !",
         newTask: "Nouvelle tâche",
         dailyMotivation: "VOTRE MOTIVATION DU JOUR",
         heroTitle: "Faites de cette journée une réussite.",
